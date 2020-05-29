@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+ul {
+	margin: 0;
+	padding: 0;
+
+}
+
+li {
+	padding: 5px 0 0 40px;
+	list-style: url(../images/star.png) inside;
+	background: none;
+}

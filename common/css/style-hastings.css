@@ -1,0 +1,80 @@
+@charset "utf-8";
+/* CSS Document */
+html, body {
+	min-height: 100%;
+}
+a{
+	color: #e77574;
+}
+a:hover{
+	color: #eb9190;
+}
+body{
+	margin: 0;
+	padding: 0;
+	background-image: url(../images/ht-bg-pattern.png), linear-gradient(45deg, #effacf, #23a7bf);
+	background-size: 100px 100px, 100%;
+	font-family: sans-serif;
+	font-size: 14px;
+}
+/* ヘッダ */
+header{
+}
+.header-container{
+	box-sizing:border-box;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 20px 20px;
+}
+/* ロゴ */
+header h1{
+	margin: 0;
+	text-indent: -9999px;
+	background-image: url(../images/ht-logo.png);
+	background-repeat: no-repeat;
+	background-size: 111px 25px;
+	width: 111px;
+	height: 25px;
+}
+/* コンテンツ */
+.contents{
+}
+.contents-container{
+	box-sizing: border-box;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #fff;
+}
+/*　フッター */
+footer{
+}
+.footer-container{
+	box-sizing: border-box;
+	max-width: 900px;
+	margin: 0 auto 10px auto;
+	padding: 10px 20px;	
+}
+footer p{
+	margin: 0;
+	color: #5f5f5f;
+}
+/* PCの時のみ */
+@media (min-width: 768px){
+	body{
+		background-size: 200px 200px, 100%;
+		font-size: 16px;
+	}
+	.header-container{
+		padding: 30px 20px;
+	}
+	header h1{
+		background-image: url(../images/ht-logo-pc.png);
+		background-size: 178px 40px;
+		width: 178px;
+		height: 40px;
+	}
+	.contents-container{
+		padding: 40px;
+	}
+}

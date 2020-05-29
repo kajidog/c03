@@ -1,0 +1,94 @@
+@charset "utf-8";
+/* CSS Document */
+html, body {
+	min-height: 100%;
+}
+a{
+	color: #2C83D2;
+}
+a:hover{
+	color: #4f96d7;
+}
+body{
+	margin: 0;
+	padding: 0;
+	background: #ffffff;
+	font-family: sans-serif;
+	font-size: 14px;
+}
+/* ヘッダ */
+header{
+	/*background-color: #ffB92a;*/
+	background-color: #F89B40;
+	background-image: url(../images/hg-bg-pattern.png);
+	background-size: 50px 50px;
+	border-bottom: #353535 5px solid;
+}
+.header-container{
+	box-sizing:border-box;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 10px 20px;
+}
+/* ロゴ */
+header h1{
+	margin: 0;
+	text-indent: -9999px;
+	background-image: url(../images/hg-logo.png);
+	background-repeat: no-repeat;
+	background-size: 124px 25px;
+	width: 124px;
+	height: 25px;
+}
+/* コンテンツ */
+.contents{
+	background-color: #fff;
+}
+.contents-container{
+	box-sizing: border-box;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 20px;
+}
+/*　フッター */
+footer{
+	background-color: #353535;
+}
+.footer-container{
+	box-sizing: border-box;
+	max-width: 900px;
+	margin: 0 auto 10px auto;
+	padding: 10px 20px;	
+}
+footer p{
+	margin: 0;
+	color: #fff;
+	font-size: 0.8rem;
+}
+/* PCの時のみ */
+@media (min-width: 768px){
+	body{
+		font-size: 16px;
+	}
+	/* ヘッダ */
+	header{
+		background-size: 100px 100px;
+		border-bottom: #353535 5px solid;
+	}
+	.header-container{
+		margin: 0 auto;
+		padding: 30px 20px;
+	}
+	header h1{
+		background-image: url(../images/hg-logo-pc.png);
+		background-size: 202px 40px;
+		width: 202px;
+		height: 40px;
+	}
+	.contents-container{
+		padding: 40px;
+	}
+	.footer-container{
+		padding: 20px;	
+	}
+}

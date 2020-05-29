@@ -1,0 +1,99 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	font-size: 16px;
+	}
+/* テンプレート別の背景 */
+body.template1{
+	background: url(../images/bg-pattern.png), linear-gradient(45deg, rgba(48,142,155,0.20), rgba(48,142,155,0.70)), #ffffff;
+	}
+body.template2{
+	background: url(../images/bg-pattern.png), linear-gradient(45deg, rgba(120,162,89,0.20), rgba(120,162,89,0.70)), #ffffff;
+	}
+body.template3{
+	background: url(../images/bg-pattern.png), linear-gradient(45deg, rgba(222,103,84,0.20), rgba(222,103,84,0.70)), #ffffff;
+	}
+html, body {
+	min-height: 100%;
+}
+header{
+	box-sizing:border-box;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 20px 20px;
+}
+/* ロゴ */
+header h1{
+	margin: 0;
+	text-indent: -9999px;
+	background-image: url(../images/logo.png);
+	background-repeat: no-repeat;
+	background-size: 173px 25px;
+	width: 173px;
+	height: 25px;
+}
+.contents{
+	box-sizing: border-box;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #fff;
+}
+/* テンプレート別のラインカラー */
+.template1 .contents{
+	border-top: rgb(48,142,155) 5px solid;
+}
+.template2 .contents{
+	border-top: rgb(120,162,89) 5px solid;
+}
+.template3 .contents{
+	border-top: rgb(222,103,84) 5px solid;
+}
+footer{
+	box-sizing: border-box;
+	max-width: 900px;
+	margin: 0 auto 10px auto;
+	padding: 20px;	
+}
+footer p{
+	margin: 0;
+	color: #909090;
+}
+/* PCの時のみ */
+@media (min-width: 768px){
+	header{
+		margin: 0 auto;
+		padding: 30px 20px;
+	}
+	header h1{
+		background-image: url(../images/logo-pc.png);
+		background-size: 286px 40px;
+		width: 286px;
+		height: 40px;
+	}
+	.contents{
+		padding: 40px;
+	}
+}
+/* テンプレート別のリンクカラー */
+.template1 a{
+	color: #ea6357;
+}
+.template1 a:hover{
+	color: #f38082;
+}
+.template2 a{
+	color: #ea6357;
+}
+.template2 a:hover{
+	color: #f38082;
+}
+.template3 a{
+	color: #36Badd;
+}
+.template3 a:hover{
+	color: #6bfce6;
+}

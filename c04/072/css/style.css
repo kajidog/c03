@@ -13,15 +13,13 @@
 }
 
 .rank li:nth-child(1) {
-	list-style: url(../images/crown1.png) inside;
+	background: url(../images/crown1.png) no-repeat;
 }
 
 .rank li:nth-child(2) {
-	list-style: url(../images/crown2.png) inside;
-
+	background: url(../images/crown2.png) no-repeat;
 }
 
 .rank li:nth-child(3) {
-	list-style: url(../images/crown3.png) inside;
-
+	background: url(../images/crown3.png) no-repeat;
 }

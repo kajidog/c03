@@ -1,0 +1,99 @@
+@charset "utf-8";
+/* CSS Document */
+html, body {
+	min-height: 100%;
+}
+a{
+	color: #d9889b;
+}
+a:hover{
+	color: #e3a0b0;
+}
+body{
+	margin: 0;
+	padding: 0;
+	background-image: url(../images/ab-bg-pattern1.jpg);
+	background-size: 122px 122px;
+	font-family: sans-serif;
+	font-size: 14px;
+}
+/* ヘッダ */
+header{	
+}
+header:before{
+	content: " ";
+	background-image: url(../images/ab-bg-pattern2.png);
+	background-size: 95px 7px;
+	display: block;
+	height: 5px;
+}
+.header-container{
+	box-sizing:border-box;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 10px 20px;
+}
+/* ロゴ */
+header h1{
+	margin: 0 auto;
+	text-indent: -9999px;
+	background-image: url(../images/ab-logo.png);
+	background-repeat: no-repeat;
+	background-size: 120px 25px;
+	width: 120px;
+	height: 25px;
+}
+/* コンテンツ */
+.contents{	
+}
+.contents-container{
+	box-sizing: border-box;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #fff;
+	box-shadow: 0 3px 5px 0 rgba(0,0,0,0.2);
+}
+/*　フッター */
+footer{
+}
+.footer-container{
+	box-sizing: border-box;
+	max-width: 900px;
+	margin: 0 auto 10px auto;
+	padding: 10px 20px;	
+}
+footer p{
+	margin: 0;
+	color: #606266;
+	text-align: center;
+	font-size: 0.8rem;
+}
+/* PCの時のみ */
+@media (min-width: 768px){
+	body{
+		background-size: 244px 244px;
+		font-size: 16px;
+	}
+	header:before{
+		background-size: 190px 14px;
+		height: 10px;
+	}
+	.header-container{
+		margin: 0 auto;
+		padding: 30px 20px;
+	}
+	header h1{
+		background-image: url(../images/ab-logo-pc.png);
+		background-size: 198px 40px;
+		width: 198px;
+		height: 40px;
+	}
+	.contents-container{
+		padding: 40px;
+		border-radius: 10px;
+	}
+	.footer-container{
+		padding: 20px;	
+	}
+}

@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+html {
+	min-height: 100vh;
+}
+
+body {
+	background: linear-gradient(to bottom, #FFC778, #FFF);
+}
+
+.content {
+	margin: 64px auto 0 auto;
+	padding: 32px;
+	max-width: 800px;
+	border-radius: 16px;
+	background: rgba(255, 255, 255, 0.6);
+}

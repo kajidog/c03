@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <title>サンプル</title>
+</head>
+
+<body>
+  <div id="content"></div>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.19.0/babel.min.js"></script>
+  <script type="text/babel">
+    const getLastDay = (date) => new Date(date.getFullYear(), date.getMonth() + 1, 0);  // 末日の取得
+    const lastDayOrJudgment = (date) => getLastDay(date)+ "" === date + "";             // 末日かどうかの判定
+
+    const dateShaping = (date) => `${date.getMonth()+1}月${date.getDate()}日`;          // 日付の整形
+    const setTomorrow = (date) => {                                                    // 次の日に設定
+      date.setDate(date.getDate() + 1);
+      return date;
+    }
+    const Component = <div>{dateShaping(setTomorrow(new Date()))}</div>;
+    const content = document.getElementById("content");
+      ReactDOM.render(Component, content);
+  </script>
+</body>
+
+</html>

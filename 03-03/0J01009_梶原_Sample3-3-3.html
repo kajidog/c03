@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <title>サンプル</title>
+  <link rel="stylesheet" href="Title.css">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.19.0/babel.min.js"></script>
+  <script type="text/babel">
+    const images = [
+      { name: "Coffee", src: "pic1.jpg"},
+      { name: "Sea", src: "pic2.jpg"},
+      { name: "Jellyfish", src: "pic3.jpg"},
+      { name: "color cone", src: "pic4.jpg"},
+      { name: "hibiscus", src: "pic5.jpg"},
+      { name: "paddy field", src: "pic6.jpg"},
+    ];
+    const getRandomImageIndex = () => parseInt(Math.random() * images.length);
+    const Component = (props) => {
+      const [image, setImage] = React.useState(images[getRandomImageIndex()]);
+      const attribute = { 
+        style: { 
+          background: `url(${image.src})`, 
+          backgroundSize: "cover", 
+          padding: "10rem 0"
+        }
+      };
+      return (
+        <div {...attribute}>
+          <h1>{image.name}</h1>
+        </div>
+      )
+    };
+    const content = document.getElementById("root");
+    ReactDOM.render(<Component />, content);
+  </script>
+</body>
+
+</html>

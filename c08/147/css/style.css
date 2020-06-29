@@ -23,5 +23,5 @@ thead th {
 }
 
 tbody td {
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px dotted #eee;
 }

@@ -2,12 +2,18 @@
 
 table {
 	border-collapse: collapse;
-	background: ;
 }
-td, th {
-	padding: 8px 20px;
+
+td,
+th {
 	border: 1px solid #b7b7b7;
 }
-td:nth-child(4), td:nth-child(6) {
+
+tbody th {
+	vertical-align: top;
+	text-align: left;
+}
+
+tbody td:last-child {
 	text-align: right;
 }

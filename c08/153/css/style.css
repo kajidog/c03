@@ -3,17 +3,23 @@
 table {
 	border-collapse: collapse;
 }
-td, th {
+
+td,
+th {
 	padding: 8px 20px;
 	border: 1px solid #b7b7b7;
 }
-td:nth-child(4), td:nth-child(6) {
+
+td:nth-child(4),
+td:nth-child(6) {
 	text-align: right;
 }
+
 thead {
 	background: #2c8daa;
 	color: #fff;
 }
+
 tbody tr:nth-child(2n) {
-	background: ;
+	background: #e2f3f8;
 }

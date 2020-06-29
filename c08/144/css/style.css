@@ -3,9 +3,12 @@
 table {
 	border-collapse: collapse;
 }
-td, th {
+
+td,
+th {
 	border: 1px solid #b7b7b7;
 }
+
 caption {
-	caption-side: ;
+	caption-side: bottom;
 }

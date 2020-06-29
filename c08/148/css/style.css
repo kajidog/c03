@@ -3,18 +3,18 @@
 table {
 	border-collapse: collapse;
 }
-td, th {
+
+td,
+th {
 	padding: 8px 20px;
 	border: 1px solid #b7b7b7;
 }
-td:nth-child(4), td:nth-child(6) {
+
+td:nth-child(4),
+td:nth-child(6) {
 	text-align: right;
 }
-th {
-	background-color: #2c8daa;
-	color: #fff;
-}
-tr:hover {
-	cursor: ;
-	background: ;
+
+th:nth-child(3) {
+	width: 20rem;
 }

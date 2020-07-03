@@ -9,15 +9,16 @@
       document.getElementById("content").innerText = "ご利用ありがとうございました。";
     }
   </script>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.19.0/babel.min.js"></script>
+
 </head>
 
 <body>
   <div id="root"></div>
-  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.19.0/babel.min.js"></script>
   <script type="text/babel">
-    const Component = (props) => {
+    const Component = () => {
       const [naviMessage, setNaviMessage] = React.useState("お客様のご依頼にお答えいたします。");
       const doClick = () => { setNaviMessage("ご利用ありがとうございました。") };
       return (

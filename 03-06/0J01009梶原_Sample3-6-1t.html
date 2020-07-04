@@ -42,52 +42,49 @@
     const SLIDE_SPEED = 1000; // スライドショーの速度
     const getPic = index => `pic${index}.jpg`; // 数字からファイル名を返す
 
-    ReactDOM.render(
-      React.createElement(() => {
-        const [index, setIndex] = React.useState(0); // 選択中の画像の番号
-        const [isActive, setIsActive] = React.useState(false); // タイマーを動かすかどうか
+    const Component = () => {
+      const [index, setIndex] = React.useState(0); // 選択中の画像の番号
+      const [isActive, setIsActive] = React.useState(false); // タイマーを動かすかどうか
 
-        const toggle = flag => event => setIsActive(flag);
-        const doSetIndex = index => event => setIndex(index);
+      const toggle = flag => event => setIsActive(flag);
+      const doSetIndex = index => event => setIndex(index);
 
-        // 画像を IMAGE_LENGTH 回表示
-        const mapImages = [...Array(IMAGE_LENGTH).keys()].map(index => (
-          <img
-            key={index}
-            className="smallimage"
-            src={getPic(index)}
-            onClick={doSetIndex(index)}
-          />
-        ));
+      const mapImages = [...Array(IMAGE_LENGTH).keys()].map(index => (
+        <img
+          key={index}
+          className="smallimage"
+          src={getPic(index)}
+          onClick={doSetIndex(index)}
+        />
+      ));
 
-        // タイマー処理
-        React.useEffect(() => {
-          let interval = null;
-          isActive
-            ? (interval = setInterval(
-                doSetIndex((index + 1) % IMAGE_LENGTH),
-                SLIDE_SPEED
-              ))
-            : clearInterval(interval);
-          return () => clearInterval(interval);
-        }, [isActive, index]);
+      React.useEffect(() => {
+        let interval = null;
+        isActive
+          ? (interval = setInterval(
+              doSetIndex((index + 1) % IMAGE_LENGTH),
+              SLIDE_SPEED
+            ))
+          : clearInterval(interval);
+        return () => clearInterval(interval);
+      }, [isActive, index]);
 
-        return (
-          <React.Fragment>
-            <div id="slideshow">
-              <img id="bigimage" src={getPic(index)} />
-            </div>
+      return (
+        <React.Fragment>
+          <div id="slideshow">
+            <img id="bigimage" src={getPic(index)} />
+          </div>
 
-            <div id="navigation">
-              <input type="button" value="●" onClick={toggle(true)} />
-              <input type="button" value="■" onClick={toggle(false)} />
-            </div>
+          <div id="navigation">
+            <input type="button" value="●" onClick={toggle(true)} />
+            <input type="button" value="■" onClick={toggle(false)} />
+          </div>
 
-            <div id="thumbnail">{mapImages}</div>
-          </React.Fragment>
-        );
-      }, null),
-      document.getElementById("root")
-    );
+          <div id="thumbnail">{mapImages}</div>
+        </React.Fragment>
+      );
+    };
+
+    ReactDOM.render(<Component />, document.getElementById("root"));
   </script>
 </html>

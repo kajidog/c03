@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+   <link rel="stylesheet" href="SlideShow.css">
+   <title>サンプル</title>
+   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.19.0/babel.min.js"></script>
+
+   <script type="text/javascript">
+      var k = 0;
+      var t = null;
+
+      function stat() {
+         window.setInterval("tick()", 1000);
+      }
+
+      function stop() {
+
+      }
+
+      function tick() {
+
+      }
+   </script>
+</head>
+
+<body>
+   <div id="root"></div>
+   <script type="text/babel">
+
+      const IMAGE_LENGTH = 15;
+      const getPic = (index) => `pic${index}.jpg`;
+
+      ReactDOM.render(React.createElement(() => {
+
+         const [index, setIndex] = React.useState(0);
+         const [isActive, setIsActive] = React.useState(false);
+
+         const toggle =(p)=> ()=> {
+            setIsActive(p);
+         };
+         
+         const mapImages = [...Array(IMAGE_LENGTH).keys()].map(index => (
+            <img className="smallimage" key={index} src={getPic(index)} />
+         ));
+
+         React.useEffect(() => {
+            let interval = null;
+            if (isActive) {
+               interval = setInterval(() => {
+                  setIndex(index => (index + 1) % IMAGE_LENGTH);
+               }, 1000);
+            } else if (!isActive && index !== 0) {
+               clearInterval(interval);
+            }
+            return () => clearInterval(interval);
+         }, [isActive, index]);
+
+         return (
+            <React.Fragment>
+               <div id="slideshow">
+                  <img id="bigimage" src={getPic(index)} />
+               </div>
+
+               <div id="navigation">
+                  <input type="button" value="●"  onClick={toggle(true)} />
+                  <input type="button" value="■"  onClick={toggle(false)} />
+               </div>
+
+               <div id="thumbnail">
+                  {mapImages}
+               </div>
+            </React.Fragment>
+         );
+      }, null), document.getElementById("root"));
+   </script>
+</body>
+
+</html>

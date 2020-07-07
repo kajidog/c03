@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <link rel="stylesheet" href="Sample.css">
+  <title>サンプル</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.19.0/babel.min.js"></script>
+  <script type="text/javascript">
+    function down() {
+      var e = document.getElementById("description");
+      var t = document.createTextNode("写真のご説明をいたします。");
+      e.appendChild(t);
+    }
+
+    function up() {
+      var e = document.getElementById("description");
+      e.removeChild(e.lastChild);
+    }
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    ReactDOM.render(React.createElement(() => {
+      const [state, setState] = React.useState(false);
+      const doSet = (p) => (e) => setState(p);
+      return (
+        <div>
+          <img id="bigimage" src="pic1.jpg" onMouseOver={doSet(true)} onMouseOut={doSet(false)} />
+          <div id="description">{state && "写真のご説明をいたします。"}</div>
+        </div>
+      );
+    }, null), document.getElementById("root"));
+  </script>
+</body>
+
+</html>

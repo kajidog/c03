@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title>メールマガジン登録</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.19.0/babel.min.js"></script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const TextArea = props => {
+        const { value, type, label, className, message, state } = props;
+        return (
+          <div
+            className={`input ${className || ""} ${
+              state === false ? "error" : ""
+            }`}
+          >
+            <div className="input_value">
+              {label && (
+                <label htmlFor={label}>
+                  {props.required && <span className="required">*</span>}
+                  {label}
+                </label>
+              )}
+              <div>
+                <textarea
+                  id={label}
+                  onChange={props.onChange}
+                  value={value || ""}
+                  placeholder={props.placeholder || ""}
+                />
+
+                {message && (
+                  <div
+                    className={`input_message ${
+                      state === false ? "error" : ""
+                    }`}
+                  >
+                    {message}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      };
+      // ラジオボタンを表示
+      const Radio = props => {
+        const { onChange, className, label, message, state, select } = props;
+        const mapValues = props.values.map((value, index) => (
+          <div key={"radio_" + value}>
+            <label htmlFor={"radio_" + value}>
+              <input
+                id={"radio_" + value}
+                type="radio"
+                name={props.name}
+                value={value}
+                onChange={onChange}
+                checked={value === select}
+              />
+              {value}
+            </label>
+          </div>
+        ));
+        return (
+          <div
+            className={`radio ${className || ""} ${
+              state === false ? "error" : ""
+            }`}
+          >
+            {label && (
+              <label>
+                {props.required && <span className="required">*</span>}
+                {label}
+              </label>
+            )}
+            <div>
+              <div className={"map_radio"}>{mapValues}</div>
+              {message && (
+                <div
+                  className={`radio_message ${state === false ? "error" : ""}`}
+                >
+                  {message}
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      };
+
+      const Input = props => {
+        const { value, label, className, message, state, required } = props;
+        return (
+          <div
+            className={`input ${className || ""} ${
+              state === false ? "error" : ""
+            }`}
+          >
+            <div className="input_value">
+              {label && (
+                <label htmlFor={label}>
+                  {props.required && <span className="required">*</span>}
+                  {label}
+                </label>
+              )}
+              <div>
+                <input
+                  id={label}
+                  type={props.type || "text"}
+                  onChange={props.onChange}
+                  value={value || ""}
+                  placeholder={props.placeholder || ""}
+                />
+                {message && (
+                  <div
+                    className={`input_message ${
+                      state === false ? "error" : ""
+                    }`}
+                  >
+                    {message}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      };
+
+      const checkLength = (target, max, isRequired) => {
+        if (isRequired && !!!target.length) {
+          return { state: false, message: "必須です" };
+        }
+        const state = target.length <= max;
+        return { state, message: state ? "" : `${max}字以内にしてください` };
+      };
+
+      const checkByRegularExpression = (
+        target,
+        max,
+        isRequired,
+        regularExpression
+      ) => {
+        const check = checkLength(target, max, isRequired);
+        if (!isRequired && !!!target.length) {
+          return { state: true, message: "" };
+        }
+        if (!check.state) {
+          return check;
+        }
+        const state = !!target.match(regularExpression);
+        return { state, message: state ? "" : `フォーマットが無効です` };
+      };
+
+      const checkTel = (target, max, isRequired) => {
+        const check = checkLength(target, max, isRequired);
+        if (!isRequired && !!!target.length) {
+          return { state: true, message: "" };
+        }
+        if (!check.state) {
+          return check;
+        }
+        const state = !!target
+          .replace(/[━.*‐.*―.*－.*\-.*ー.*\-]/gi, "")
+          .match(/^(0[5-9]0[0-9]{8}|0[1-9][1-9][0-9]{7})$/);
+        return { state, message: state ? "" : `フォーマットが無効です` };
+      };
+
+      // checkTelなどの補助
+      const checkTreatment = (treatment, option) => next => ({
+        ...next,
+        ...treatment(next.value, next.maxLength, next.required, option)
+      });
+
+      const Component = props => {
+        const [submit, setSubmit] = React.useState(false);
+        const [forms, setForms] = React.useState(() => {
+          const setState = {};
+          Object.keys(props.values).forEach(key => {
+            setState[key] = {
+              ...props.values[key],
+              message: "",
+              state: null,
+              value:
+                props.values[key].type === "radio" ? "" : props.values[key].init
+            };
+          });
+          return setState;
+        });
+
+        // onChange の補助
+        const setResult = (next, key) => {
+          const set = {};
+          Object.keys(forms).forEach(_key => {
+            set[_key] = key === _key ? next : forms[_key];
+          });
+          return set;
+        };
+
+        // onChange
+        const handleChange = key => e => {
+          setForms(
+            setResult(
+              submit
+                ? forms[key].onSubmit({
+                    ...forms[key],
+                    value: e.target.value
+                  })
+                : forms[key].onChange({
+                    ...forms[key],
+                    value: e.target.value
+                  }),
+              key
+            )
+          );
+        };
+
+        // 全てOKか？
+        const checkAll = () => {
+          let flg = true;
+          const result = {};
+          const set = {};
+          Object.keys(forms).forEach(key => {
+            set[key] = forms[key].onSubmit(forms[key]);
+            !!!set[key].state && (flg = false);
+            flg && (result[key] = set[key].value);
+          });
+          setForms(set);
+          return { flg, result };
+        };
+
+        // Submit時
+        const handleSubmit = e => {
+          e.preventDefault();
+          setSubmit(true);
+          const { flg, result } = checkAll();
+          flg && props.allClear(result);
+        };
+
+        const mapForms = Object.keys(forms).map(key => {
+          const {
+            label,
+            value,
+            onChange,
+            placeholder,
+            type,
+            state,
+            message,
+            init,
+            required
+          } = forms[key];
+          switch (type) {
+            case "input":
+              return (
+                <Input
+                  key={"input_" + key}
+                  label={label}
+                  value={value}
+                  onChange={handleChange(key)}
+                  placeholder={placeholder}
+                  state={state}
+                  required={required}
+                  message={message}
+                />
+              );
+            case "radio":
+              return (
+                <Radio
+                  key={"radio_" + key}
+                  label={label}
+                  values={init}
+                  onChange={handleChange(key)}
+                  state={state}
+                  message={message}
+                  name={key}
+                  select={value}
+                  required={required}
+                />
+              );
+            case "textarea":
+              return (
+                <TextArea
+                  key={"textarea_" + key}
+                  label={label}
+                  value={value}
+                  onChange={handleChange(key)}
+                  placeholder={placeholder}
+                  state={state}
+                  message={message}
+                  required={required}
+                />
+              );
+            default:
+              return null;
+          }
+        });
+
+        return (
+          <div className="main">
+            <div className="form">
+              <h1 className="form_title">{props.title}</h1>
+              <form onSubmit={handleSubmit}>
+                {mapForms}
+                <input className="form_submit" type="submit" value="送信" />
+              </form>
+            </div>
+          </div>
+        );
+      };
+
+      const content = document.getElementById("root");
+      ReactDOM.render(
+        <Component
+          allClear={result => {
+            // 全ての条件をクリアした時
+            console.log(result);
+            alert("Completed!! See the 'developer tools'. Results.");
+          }}
+          title="メールマガジン登録"
+          values={{
+            // フォームの内容
+            name: {
+              type: "input", //入力の種類
+              label: "名前", // ラベル名
+              init: "", // 初期値
+              required: true, // 必須かどうか
+              placeholder: "氏名", // プレースホルダー
+              maxLength: 20, // 上限
+              onChange: checkTreatment(checkLength), // 普通の時の処理
+              onSubmit: checkTreatment(checkLength) // Submit が一度でも押された後の処理
+            },
+            gender: {
+              type: "radio", // ラジオぼたん
+              label: "性別",
+              init: ["男性", "女性"],
+              required: true,
+              maxLength: 100,
+              onChange: checkTreatment(checkLength),
+              onSubmit: checkTreatment(checkLength)
+            },
+            address: {
+              type: "input",
+              label: "郵便番号",
+              init: "",
+              required: true,
+              placeholder: "706-0021",
+              maxLength: 10,
+              onChange: checkTreatment(checkLength),
+              onSubmit: checkTreatment(
+                checkByRegularExpression,
+                /^\d{3}-?\d{4}$/
+              )
+            },
+            tel: {
+              type: "input",
+              label: "電話番号",
+              init: "",
+              placeholder: "09028070449",
+              maxLength: 15,
+              onChange: checkTreatment(checkLength),
+              onSubmit: checkTreatment(checkTel)
+            },
+            mail: {
+              type: "input",
+              label: "メールアドレス",
+              init: "",
+              required: true,
+              placeholder: "hoge@mail.com",
+              maxLength: 30,
+              onChange: checkTreatment(checkLength),
+              onSubmit: checkTreatment(
+                checkByRegularExpression,
+                /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/
+              )
+            },
+
+            interest: {
+              type: "textarea",
+              label: "興味のあるジャンル",
+              init: "",
+              placeholder:
+                "React.js, Gatsby.js, Next.js...  チェックボックですよね",
+              maxLength: 30,
+              onChange: checkTreatment(checkLength),
+              onSubmit: checkTreatment(checkLength)
+            }
+          }}
+        />,
+        content
+      );
+    </script>
+  </body>
+</html>

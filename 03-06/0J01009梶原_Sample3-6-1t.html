@@ -14,22 +14,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.19.0/babel.min.js"></script>
 
     <script type="text/javascript">
-      let k = 0;
-      let t = null;
+      var k = 0;
+      var t = null;
 
-      const stat = () => {
+      function stat() {
         t = t || window.setInterval(tick, 1000);
-      };
+      }
 
-      const stop = () => {
+      function stop() {
         window.clearInterval(t);
         t = null;
-      };
+      }
 
-      const tick = () => {
+      function tick() {
         k = (k + 1) % 15;
         document.getElementById("bigimage").setAttribute("src", `pic${k}.jpg`);
-      };
+      }
     </script>
   </head>
 
@@ -43,20 +43,22 @@
     const getPic = index => `pic${index}.jpg`; // 数字からファイル名を返す
 
     const Component = () => {
-      const [index, setIndex] = React.useState(0); // 選択中の画像の番号
-      const [isActive, setIsActive] = React.useState(false); // タイマーを動かすかどうか
+      const [index, setIndex] = React.useState(0);
+      const [isActive, setIsActive] = React.useState(false);
 
       const toggle = flag => event => setIsActive(flag);
       const doSetIndex = index => event => setIndex(index);
 
-      const mapImages = [...Array(IMAGE_LENGTH).keys()].map(index => (
-        <img
-          key={index}
-          className="smallimage"
-          src={getPic(index)}
-          onClick={doSetIndex(index)}
-        />
-      ));
+      const mapImages = Array(IMAGE_LENGTH)
+        .fill(0)
+        .map((_, index) => (
+          <img
+            key={index}
+            className="smallimage"
+            src={getPic(index)}
+            onClick={doSetIndex(index)}
+          />
+        ));
 
       React.useEffect(() => {
         let interval = null;

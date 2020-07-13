@@ -3,7 +3,8 @@
 body {
 	line-height: 1.7;
 }
+
 strong {
 	font-weight: normal;
-	background: ;
+	background: linear-gradient(transparent 55%, #fafa00 55%, #fafa00 100%);
 }

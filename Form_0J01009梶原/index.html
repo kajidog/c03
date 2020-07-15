@@ -260,10 +260,15 @@
             required
           } = forms[key];
           switch (type) {
-            case "input":
+            case undefined:
+            case "text":
+            case "email":
+            case "tel":
+            case "password":
               return (
                 <Input
                   key={"input_" + key}
+                  type={type}
                   label={label}
                   value={value}
                   onChange={handleChange(key)}
@@ -330,7 +335,7 @@
           values={{
             // フォームの内容
             name: {
-              type: "input", //入力の種類
+              type: "text", //入力の種類
               label: "名前", // ラベル名
               init: "", // 初期値
               required: true, // 必須かどうか
@@ -342,14 +347,14 @@
             gender: {
               type: "radio", // ラジオぼたん
               label: "性別",
-              init: ["男性", "女性"],
+              init: ["男性", "女性", "その他"],
               required: true,
               maxLength: 100,
               onChange: checkTreatment(checkLength),
               onSubmit: checkTreatment(checkLength)
             },
             address: {
-              type: "input",
+              type: "text",
               label: "郵便番号",
               init: "",
               required: true,
@@ -362,7 +367,7 @@
               )
             },
             tel: {
-              type: "input",
+              type: "tel",
               label: "電話番号",
               init: "",
               placeholder: "09028070449",
@@ -371,7 +376,7 @@
               onSubmit: checkTreatment(checkTel)
             },
             mail: {
-              type: "input",
+              type: "email",
               label: "メールアドレス",
               init: "",
               required: true,

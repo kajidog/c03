@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>入力チェックで引っかかったテキストフィールドのスタイルを変更したい</title>
+<link rel="stylesheet" href="../../common/css/style-auberge.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+	<div class="header-container">
+		<h1>auberge</h1>
+	</div>
+</header>
+<div class="contents">
+	<div class="contents-container">
+	<!-- サンプル ここから -->
+
+	<h1>お問い合わせ</h1>
+	<form action="#" method="POST">
+		<p>
+			<label for="realname">お名前</label><br>
+			<input type="text" name="realname" id="realname" autofocus required>
+		</p>
+		<p>
+			<label for="mail">メールアドレス</label><br>
+			<input type="email" name="mail" id="mail" required>
+		</p>
+		<p>
+			<label for="phone">電話番号</label><br>
+			<input type="tel" name="phone" id="phone">
+		</p>
+		<p>
+			<label for="message">お問い合わせ内容</label><br>
+			<textarea name="message" id="message"></textarea>
+		</p>
+		<p><input type="submit" value="送信"></p>
+	</form>
+
+	<!-- サンプル ここまで -->
+	</div>
+</div>
+<footer>
+	<div class="footer-container">
+		<p>©auberge</p>
+	</div>
+</footer>
+</body>
+</html>

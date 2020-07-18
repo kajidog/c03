@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>カレンダーを表示したい</title>
+    <link rel="stylesheet" href="Cal.css" />
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.19.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script type="text/babel">
+    const mapDate = (length, start, max) =>
+      Array(length)
+        .fill(0)
+        .map((_, index) => (
+          <td key={start + "" + index}>
+            {start + index < max ? start + index : null}
+          </td>
+        ));
+
+    const mapWeek = (date, week) => {
+      const emp = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+      const days = new Date(
+        date.getFullYear(),
+        date.getMonth() + 1,
+        0
+      ).getDate();
+      const start = !week ? 1 : week * 7 - emp + 1;
+      return week * 7 - emp >= days ? null : (
+        <tr>
+          {!week && mapDate(emp, null, 0)}
+          {mapDate(7 - (!week ? emp : 0), start, days + 1)}
+        </tr>
+      );
+    };
+    const yearMonth = (date, change) => {
+      const _date = new Date(date.getFullYear(), date.getMonth() + change);
+      return `${_date.getFullYear()}年${_date.getMonth() + 1}月`;
+    };
+
+    const Calender = (props) => {
+      // props.date 開始時の日付
+      // props.onChange 日付変更時にコールバックで変更後の日付を返す
+      const [date, setDate] = React.useState(props.date);
+      const didMount = React.useRef(false);
+
+      // クリックイベント
+      const handleChange = (next) => (event) =>
+        setDate(new Date(date.getFullYear(), date.getMonth() + next));
+
+      React.useLayoutEffect(() => {
+        didMount.current ? props.onChange(date) : (didMount.current = true);
+      }, [date]);
+
+      return (
+        <div className="calendar-wrapper">
+          <button onClick={handleChange(-1)}>{yearMonth(date, -1)}</button>
+          <button onClick={handleChange(1)}>{yearMonth(date, 1)}</button>
+          <table className="calendar">
+            <caption>{yearMonth(date, 0)}</caption>
+            <thead>
+              <tr>
+                <th>日</th>
+                <th>月</th>
+                <th>火</th>
+                <th>水</th>
+                <th>木</th>
+                <th>金</th>
+                <th>土</th>
+              </tr>
+            </thead>
+            <tbody>
+              {mapWeek(date, 0)}
+              {mapWeek(date, 1)}
+              {mapWeek(date, 2)}
+              {mapWeek(date, 3)}
+              {mapWeek(date, 4)}
+              {mapWeek(date, 5)}
+            </tbody>
+          </table>
+        </div>
+      );
+    };
+
+    ReactDOM.render(
+      <Calender date={new Date()} onChange={(a) => console.log(a)} />,
+      document.getElementById("root")
+    );
+  </script>
+</html>

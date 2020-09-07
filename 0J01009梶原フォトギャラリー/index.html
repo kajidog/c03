@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>フォトギャラリー</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.19.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      // ______________________________________________________
+      // 画像並べる
+      const ImageList = (props) => {
+        const { images, onClick } = props;
+        const doClick = (index) => () => {
+          onClick(index);
+        };
+        const mapImages = images.map((image, index) => (
+          <img
+            onClick={doClick(index)}
+            key={"list_" + image.src}
+            src={image.src}
+            alt=""
+          />
+        ));
+        return <div className="thumb">{mapImages}</div>;
+      };
+
+      // ______________________________________________________
+      // 大きい画像
+      const ImagePreview = (props) => {
+        const { image } = props;
+        return (
+          <div className="main">
+            <img src={image.src} alt="" />
+            <p>{image.msg}</p>
+          </div>
+        );
+      };
+
+      // ______________________________________________________
+      // メイン
+      const images = [
+        { src: "img/1.jpg", msg: "山道の緑が気持ちいい" },
+        { src: "img/2.jpg", msg: "階段きつかった" },
+        { src: "img/3.jpg", msg: "高尾山薬王院！" },
+        { src: "img/4.jpg", msg: "帰りはロープウェイでスイスイ" },
+        { src: "img/5.jpg", msg: "〆のお蕎麦です" },
+      ];
+
+      const Component = () => {
+        const [index, setIndex] = React.useState(0);
+        return (
+          <div id="gallery">
+            <ImagePreview image={images[index]} />
+            <ImageList images={images} onClick={setIndex} />
+          </div>
+        );
+      };
+
+      const content = document.getElementById("root");
+      ReactDOM.render(<Component />, content);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ナビゲーションのデザインを変えたい（flexbox版）</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <a href="#"><h1 class="header-logo">シェアードオフィス NEST 505</h1></a>
+        <a href="#" id="slidemenu-btn"><div class="header-navbtn"></div></a>
+      </div>
+    </header>
+    <nav>
+      <div class="nav-container" id="js-slidemenu">
+        <ul class="globalnav">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Price</a></li>
+          <li><a href="#">Facilities</a></li>
+          <li><a href="#">Access</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="main-contents">
+      <div class="main-contents-container">
+        <div class="keyvisual"><img src="images/keyvisual.jpg" alt="" /></div>
+        <p class="maincopy">
+          シェアードオフィスNEST 505で、上がる効率、深まる知識、広がる仕事。
+        </p>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-container">
+        <p class="copyright">©NEST 505</p>
+      </div>
+    </footer>
+    <script src="script/jquery-3.1.1.min.js"></script>
+    <script src="script/custom.js"></script>
+  </body>
+</html>

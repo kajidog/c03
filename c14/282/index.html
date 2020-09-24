@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>フォーム部品を伸縮させたい</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <a href="#"><h1 class="header-logo">シェアードオフィス NEST 505</h1></a>
+      </div>
+    </header>
+    <nav>
+      <div class="nav-container">
+        <ul class="globalnav">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Price</a></li>
+          <li><a href="#">Facilities</a></li>
+          <li><a href="#">Access</a></li>
+          <li><a href="#" class="current">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="main-contents">
+      <div class="main-contents-container">
+        <div class="contact">
+          <h1>お問い合わせ</h1>
+          <form action="#">
+            <p>
+              <label for="name">お名前</label><br />
+              <input type="text" name="name" id="name" />
+            </p>
+            <p>
+              <label for="email">メールアドレス</label><br />
+              <input type="email" name="email" id="email" />
+            </p>
+            <p>
+              <label for="msg">お問い合わせ内容</label><br />
+              <textarea name="msg" id="msg"></textarea>
+            </p>
+            <p><input type="submit" value="送信" /></p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-container">
+        <p class="copyright">©NEST 505</p>
+      </div>
+    </footer>
+  </body>
+</html>
